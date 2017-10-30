@@ -22,7 +22,7 @@ class Ui(QtWidgets.QMainWindow):
     def __init__(self):
         # USED TO INIITALIZE THE GUI DO NOT ALTER
         super(Ui, self).__init__()
-        uic.loadUi('EEG_GUI_E1.ui', self)  # Load Designer File MAKE SURE IS IN SAME DIRECTORY AS THIS SCRIPT
+        uic.loadUi('EEG_Vis_1.ui', self)  # Load Designer File MAKE SURE IS IN SAME DIRECTORY AS THIS SCRIPT
         self.initui()
         self.showMaximized()  # Full screen
         pg.setConfigOption('useWeave', True)  # Use weave to optimize some processes
