@@ -401,18 +401,22 @@ class Ui(QtWidgets.QMainWindow):
                 self.raw_eeg = raw_eeg.read()
             elif self.mb == 'b':
                 channels=[]
+                channels2=[]
                 for pair in self.bpc:
                     try:
                         chan1=int(eval(str(pair[0][0:4]).lstrip('0')))
-                        channels.append(chan1-1)
+                        channels.append(chan1)
                         chan2=int(eval(str(pair[1][0:4]).lstrip('0')))
-                        channels.append(chan2-1)
+                        channels.append(chan2)
                     except Exception as e:
                         print(e)
                 channels = list(set(channels))
-                print(channels)
-                channels = self.monopolar_channels[channels[:]]
-                raw_eeg = EEGReader(session_dataroot=self.session, channels=channels)
+                chan_loads=[]
+                for channel in channels:
+                    chan_load = np.where(self.monopolar_channels == (np.array(['{:03d}'.format(channel)], dtype='|S3')))[0]
+                    #chan_loads.append(chan_load[0])
+                    channels2.append(chan_load[0])
+                raw_eeg = EEGReader(session_dataroot=self.session, channels=self.monopolar_channels[channels2])
                 raw_eeg = raw_eeg.read()
                 self.raw_eeg = MonopolarToBipolarMapper(time_series=raw_eeg,
                                                      bipolar_pairs=self.bpc).filter()
