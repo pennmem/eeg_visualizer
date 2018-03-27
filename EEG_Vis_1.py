@@ -5,7 +5,7 @@ from PyQt5.QtGui import *
 import pyqtgraph as pg
 from ptsa.data.readers import *
 from ptsa.data.filters import *
-from ptsa.data.readers.IndexReader import JsonIndexReader
+from ptsa.data.readers import JsonIndexReader
 import numpy as np
 from scipy.signal import butter, filtfilt, freqz
 import sys
